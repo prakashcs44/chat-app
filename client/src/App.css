@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-
 .chat-container{
    width:400px;
    height:500px;
@@ -42,7 +41,7 @@
   font-size: 17px;
   border: none;
   box-shadow: 1px 1px 5px 1px;
-  margin-left: 12px;
+  margin-left: 15px;
  outline: none;
 
 }
