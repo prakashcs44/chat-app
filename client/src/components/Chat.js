@@ -28,9 +28,14 @@ return ()=>{
 
 
 const sendMessage = () => {
+  if(message&&message.message){
   socket.emit('chat message', message,room);
-  setMessageList(prevMessageList => [...prevMessageList, message]);
-  setMessage({});
+  const msg = message;
+  msg.name = "you"
+  setMessageList(prevMessageList => [...prevMessageList, msg]);
+  setMessage(undefined);
+  }
+ 
 };
 
 
@@ -52,7 +57,7 @@ const sendMessage = () => {
       setMessage({message:ev.target.value,time:currentTime(),name})
      }}
 
-     value={message.message}
+     value={message?message.message:""}
      
      />
      <button className='send-btn'
