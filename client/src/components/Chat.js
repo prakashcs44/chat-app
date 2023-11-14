@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Message from './Message'
 import socket from '../socket'
 import currentTime from "../Time"
@@ -11,6 +11,8 @@ const [messageList,setMessageList] = useState([])
 const [message,setMessage]  = useState({});
 
 
+const chatViewRef = useRef();
+
 
 
 useEffect(()=>{
@@ -22,7 +24,16 @@ setMessageList(prevMessageList => [...prevMessageList, msg]);
 return ()=>{
   socket.off("chat message");
 }
-})
+});
+
+
+useEffect(()=>{
+
+if(chatViewRef.current){
+  chatViewRef.current.scrollTop = chatViewRef.current.scrollHeight;
+}
+
+},[messageList])
 
 
 
@@ -34,15 +45,26 @@ const sendMessage = () => {
   msg.name = "you"
   setMessageList(prevMessageList => [...prevMessageList, msg]);
   setMessage(undefined);
+  
   }
  
 };
 
 
+
+
+
+
+
+
   return (
     <div className='chat-container'>
     
- <div className='chat-view'>
+ <div className='chat-view'
+ 
+   ref={chatViewRef}
+ 
+ >
    {messageList.map((message)=>{
       return <Message message={message.message} time = {message.time}
       
@@ -51,7 +73,7 @@ const sendMessage = () => {
    })}
  </div>
 
-     <input placeholder='write your message...' className='chat'
+     <input placeholder='Message...' className='chat'
      
      onChange={(ev)=>{
       setMessage({message:ev.target.value,time:currentTime(),name})

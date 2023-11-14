@@ -20,13 +20,13 @@ function Home({setName,setRoom}) {
      }}
      
      />
-      <input placeholder='enter room'
+      <input placeholder='Enter room'
      className='input-room'
      onChange={(ev)=>{
       room = ev.target.value
      }}
      />
-     <button onClick={()=>joinRoom()} className='join-btn'>join</button>
+     <button onClick={()=>joinRoom()} className='join-btn'>Join</button>
     
     
     </div>
