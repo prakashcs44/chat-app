@@ -12,16 +12,33 @@ const io = new Server(server,{
 
 
 
+const members = new Map();
 
 
 io.on('connection', (socket) => {
+     
+     
+      socket.on("disconnect",()=>{
+        members.delete(socket.id);
+        const membersAsObj = Object.fromEntries(members);
+        io.emit("disconnected",membersAsObj)
+      })
+   
       socket.on("chat message",(message,room)=>{
-        
         socket.broadcast.to(room).emit('chat message', message);
       })
 
-      socket.on("join-room",(room)=>{
+      socket.on("join-room",(room,user,time)=>{
+        
+        const membersAsObj = Object.fromEntries(members);
+        
+        socket.emit("connected",membersAsObj);
+        
+        members.set(socket.id,{name:user,time});
+      
         socket.join(room);
+        
+        socket.broadcast.to(room).emit('join-room',user,time);
       })
   });
 

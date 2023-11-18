@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useContext} from 'react'
 import socket from '../socket'
-function Home({setName,setRoom}) {
+import { chatContext } from '../contexts/ChatContext'
+import currentTime from "../Time"
+function Home() {
 
+   const {setRoom,setUsername}  = useContext(chatContext);
+   
     let name = ""
-    let room  = ""
-    
+    let tempRoom = ""
     const joinRoom = ()=>{
-        setName(name)
-        setRoom(room)
-        socket.emit("join-room",room);
+      
+       setUsername(name)
+       socket.emit("join-room",tempRoom,name,currentTime());
+       setRoom(tempRoom)
+      
     }
+
+   
 
   return (
     <div className='home-container'>
      <input placeholder='Enter your name'
      className='input-name'
      onChange={(ev)=>{
+      
       name = ev.target.value
      }}
      
@@ -23,7 +31,7 @@ function Home({setName,setRoom}) {
       <input placeholder='Enter room'
      className='input-room'
      onChange={(ev)=>{
-      room = ev.target.value
+     tempRoom = (ev.target.value)
      }}
      />
      <button onClick={()=>joinRoom()} className='join-btn'>Join</button>
