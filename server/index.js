@@ -28,6 +28,13 @@ io.on('connection', (socket) => {
         socket.broadcast.to(room).emit('chat message', message);
       })
 
+
+     socket.on("user-writting",(user,room)=>{
+
+        socket.broadcast.to(room).emit("someone-writing",user);
+     })
+     
+
       socket.on("join-room",(room,user,time)=>{
         
         const membersAsObj = Object.fromEntries(members);

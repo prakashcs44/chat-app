@@ -6,7 +6,7 @@ function RoomDetails() {
   
   return (
     <div className='room-details'>
-      <p className='group-id'>Group id:{room}</p>
+      <p className='group-id'>Room id:{room}</p>
       <div
       
       style={{fontSize:"1.4rem",marginTop:"6px",marginLeft:"10px"}}

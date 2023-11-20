@@ -1,10 +1,14 @@
-import React, { useContext, useEffect, useRef} from 'react'
+import React, { useContext, useEffect, useRef, useState} from 'react'
 import Message from './Message'
 import socket from '../socket'
 import currentTime from "../Time"
 import {chatContext} from "../contexts/ChatContext"
+import Writing from './Writing'
 
 function Chat() {
+
+const [writer,setWriter] = useState("");
+const [writing,setWriting]  = useState(false);
 
 
 const {messageList,setMessageList,message,setMessage,
@@ -25,8 +29,11 @@ setMessageList(prevMessageList => [...prevMessageList, msg]);
 
 });
 
+
+
 return ()=>{
   socket.off('chat message');
+ 
 }
 
 
@@ -35,13 +42,36 @@ return ()=>{
 },[]);
 
 
+
+useEffect(()=>{
+  socket.on("someone-writing",(user)=>{
+    setWriter(user);
+    setWriting(true);
+    setTimeout(()=>{
+      setWriting(false)
+    },2000)
+   
+  
+   
+})
+
+return ()=>{
+  socket.off("someone-writing")
+  setWriting(false);
+}
+
+},[]);
+
+
+
+
 useEffect(()=>{
 
 if(chatViewRef.current){
   chatViewRef.current.scrollTop = chatViewRef.current.scrollHeight;
 }
 
-},[messageList])
+},[messageList,writing])
 
 
 // useEffect(()=>{
@@ -68,6 +98,13 @@ const sendMessage = () => {
 
 
 
+const writingMessage = (ev)=>{
+
+  socket.emit("user-writting",username,room);
+  
+  setMessage({message:ev.target.value,time:currentTime(),username})
+}
+
 
 
 
@@ -87,12 +124,13 @@ const sendMessage = () => {
       name = {message.username}
       />
    })}
+   {writing?<Writing writer = {writer}/>:(<></>)}
  </div> 
 
      <input placeholder='Message...' className='chat'
      
      onChange={(ev)=>{
-      setMessage({message:ev.target.value,time:currentTime(),username})
+       writingMessage(ev);
      }}
 
      value={message?message.message:""}
