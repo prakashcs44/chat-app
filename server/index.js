@@ -19,9 +19,10 @@ io.on('connection', (socket) => {
      
      
       socket.on("disconnect",()=>{
+        const sckt = members.get(socket.id);
         members.delete(socket.id);
-        const membersAsObj = Object.fromEntries(members);
-        io.emit("disconnected",membersAsObj)
+        // const membersAsObj = Object.fromEntries(members);
+        io.emit("disconnected",sckt?.name)
       })
    
       socket.on("chat message",(message,room)=>{

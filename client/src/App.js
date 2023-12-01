@@ -9,7 +9,7 @@ import currentTime from './Time.js';
 
 function App() {
  
-  const {username,setMembers} =  useContext(chatContext)
+  const {username,setMembers,members} =  useContext(chatContext)
  
  
 
@@ -19,35 +19,33 @@ function App() {
    socket.on("connected",(data)=>{
 
     
-    const members = []
+  
 
     
      for(const key in data){
-      
-       const user = data[key];
-        members.push({name:user.name,time:user.time});
+        const user = data[key];
+        setMembers((prevMembers => [...prevMembers,{name:user.name,time:user.time}]))
      }
      
-      members.push({name:"you",time:currentTime()});
-      setMembers(members);
+     setMembers((prevMembers => [...prevMembers,{name:"you",time:currentTime()}]))
+      
+      
    });
 
-   socket.on("disconnected",data=>{
-    const members = []
-    for(const key in data){
-      
-      const user = data[key];
-       members.push({name:user.name,time:user.time});
-    }
-    setMembers(members);
-   })
+   socket.on("disconnected", name => {
+    setMembers(prevMembers => {
+      const updatedMembers = prevMembers.filter(m => m.name !== name);
+      console.log(updatedMembers); 
+      return updatedMembers;
+    });
+  });
+  
    
    
 
     socket.on("join-room",(user,time)=>{
       
       const newUser = {name:user,time};
-      console.log(newUser)
       setMembers(prevMembers => [...prevMembers,newUser])
     })
 
