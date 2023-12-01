@@ -19,7 +19,7 @@ function Loading() {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(changeColor, 900); // Change color every 1 second
+    const intervalId = setInterval(changeColor, 500); // Change color every 1 second
    
     return () => {
       clearInterval(intervalId); // Clear the interval when the component unmounts

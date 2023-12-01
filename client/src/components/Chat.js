@@ -9,7 +9,8 @@ function Chat() {
 
 const [writer,setWriter] = useState("");
 const [writing,setWriting]  = useState(false);
-
+const [prev,setPrev] = useState("");
+const [curr,setCurr] = useState("");
 
 const {messageList,setMessageList,message,setMessage,
   room,
@@ -44,16 +45,23 @@ return ()=>{
 
 
 useEffect(()=>{
+
+  let timeout;
   socket.on("someone-writing",(user)=>{
+   if(!writing){
     setWriter(user);
     setWriting(true);
-    setTimeout(()=>{
+    clearTimeout(timeout)
+   timeout = setTimeout(()=>{
       setWriting(false)
-    },2000)
+    },1000)
    
-  
+  }
    
 })
+
+
+
 
 return ()=>{
   socket.off("someone-writing")
@@ -61,6 +69,8 @@ return ()=>{
 }
 
 },[]);
+
+
 
 
 
@@ -100,7 +110,7 @@ const sendMessage = () => {
 
 const writingMessage = (ev)=>{
 
-  socket.emit("user-writting",username,room);
+  socket.emit("user-writting",username,room,message?.message);
   
   setMessage({message:ev.target.value,time:currentTime(),username})
 }

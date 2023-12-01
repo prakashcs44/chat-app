@@ -29,9 +29,9 @@ io.on('connection', (socket) => {
       })
 
 
-     socket.on("user-writting",(user,room)=>{
+     socket.on("user-writting",(user,room,message)=>{
 
-        socket.broadcast.to(room).emit("someone-writing",user);
+        socket.broadcast.to(room).emit("someone-writing",user,message);
      })
      
 
