@@ -1,0 +1,241 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  :root{
+     --button-color:rgb(3, 188, 3);
+     --user-message-color:rgb(174, 232, 174);
+     --other-message-color:rgb(255, 254, 254);
+     --background:white;
+      --chat-background:rgb(232, 223, 223);
+      --text-color:black;
+  }
+  
+  
+  
+  .dark-mode{
+    --button-color:rgb(3, 188, 3);
+    --user-message-color:rgb(0, 121, 0);
+    --other-message-color:rgb(63, 62, 62);
+    --background:black;
+     --chat-background:rgb(25, 23, 23);
+     --text-color:white;
+    
+  }
+  
+  
+  
+  .room{
+    width:1000px;
+    height:600px;
+    margin: auto;
+    /* border: 2px solid black; */
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+  }
+  
+  .chat-container{
+    width:40%;
+    height:80%;
+    margin-top: 40px;
+    
+  }
+  
+  
+  .room-details{
+    width:40%;
+    height:80%;
+    margin-top: 40px;
+    background-color:var(--chat-background);
+    box-shadow: 0px 0px 5px 0px;
+    overflow-y: scroll;
+    color:var(--text-color);
+  }
+  
+  .room-details::-webkit-scrollbar{
+    display: none;
+  }
+  
+  .group-id{
+    width:100%;
+    text-align: center;
+    background-color:var(--button-color);
+    height:50px;
+    font-size: 1.5rem;
+  }
+  
+  .room-members{
+    margin-top: 10px;
+    margin-left:10px;
+    font-size: 1.2rem;
+    line-height: 30px;
+    /* border: 2px solid black; */
+    
+  }
+  
+  .chat-view{
+    width:100%;
+    height:90%;
+    border-radius: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color:var(--chat-background);
+    box-shadow: 0px 0px 5px 0px;
+   
+    
+  }
+  
+  
+  .chat-view::-webkit-scrollbar{
+    display: none;
+  }
+  
+  
+  
+  .chat{
+    width:70%;
+    height:10%;
+    padding-left: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: 17px;
+    border: none;
+    box-shadow: 1px 1px 5px 1px;
+    margin-left: 15px;
+   outline: none;
+  
+  }
+  
+  
+  .send-btn{
+    width:20%;
+    height:10%;
+    border-radius: 10px;
+    font-size: 17px;
+    border: none;
+    box-shadow: 1px 1px 5px 1px;
+    outline: none;
+    background-color:var(--button-color);
+    margin-left: 3px;
+   
+  }
+  
+  .send-btn:hover{
+    background-color: rgb(30, 172, 30);
+  }
+  
+  
+  .message-container-other{
+    max-width:300px;
+    border-radius: 10px;
+   color:var(--text-color);
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color:var(--other-message-color);
+    box-shadow: 0px 0px 5px 0px;
+    
+  }
+  
+  
+  .message-container-user{
+    max-width:300px;
+    border-radius: 10px;
+    margin-left: 90px;
+    color:var(--text-color);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color:var(--user-message-color);
+    box-shadow: 0px 0px 5px 0px;
+    
+  }
+  
+  
+  
+  
+  
+  
+  .username{
+    font-size: 1.2rem;
+    color:var(--text-color);
+    margin-left: 6px;
+    
+  }
+  
+  .time{
+    position:relative;
+    left:250px;
+   
+    
+  } 
+  
+  .message{
+    margin-left:6px;
+    margin-top: 5px;
+   
+  }
+  
+  
+  .home-container{
+    width:500px;
+    height:300px;
+    margin: auto;
+    margin-top: 200px;
+    background-color:var(--chat-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 0px;
+  }
+  
+  
+  .input-room ,.input-name{
+   width: 80%;
+   height:20%;
+   border-radius: 10px;
+   padding-left:10px;
+    border: none;
+    box-shadow: 1px 1px 5px 1px;
+   font-size: 1.1rem;
+   outline: none;
+   
+  }
+  
+  .join-btn{
+    width:50%;
+    height:20%;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    background-color: rgb(102, 209, 102);
+  }
+  
+  
+  .join-btn:hover{
+    background-color:var(--button-color);
+    
+  }
+  
+  
+  
+  .mode-button{
+    margin-left: 30px;
+    margin-top: 20px;
+    width:100px;
+    height:30px;
+    color:var(--text-color);
+    background-color: var(--chat-background);
+   
+  }
+  
+  
+  
+  
+  

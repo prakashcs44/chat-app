@@ -7,9 +7,10 @@ import { chatContext } from './contexts/ChatContext.js';
 import currentTime from './Time.js';
 
 
+
 function App() {
  
-  const {username,setMembers,members} =  useContext(chatContext)
+  const {username,setMembers,colorMode,setColorMode} =  useContext(chatContext)
  
  
 
@@ -79,13 +80,30 @@ function App() {
     };
   }, []);
 
-
+const toggleMode = ()=>{
+  if(colorMode === "light"){
+    setColorMode("dark")
+  }
+  else{
+    setColorMode("light")
+  }
+}
 
 
 
   return (
     
-      <div className="App">
+      <div className={colorMode==="dark"?("dark-mode"):""}
+      
+    
+      
+      >
+      
+        <button className='mode-button'
+        
+        onClick={()=>toggleMode()}
+        
+        >{colorMode === "light"?"Dark mode":"Light mode"}</button>
         {username ? <Room/> : <Home/>}
       </div>
    

@@ -17,11 +17,10 @@ const members = new Map();
 
 io.on('connection', (socket) => {
      
-     
       socket.on("disconnect",()=>{
         const sckt = members.get(socket.id);
         members.delete(socket.id);
-        // const membersAsObj = Object.fromEntries(members);
+      
         io.emit("disconnected",sckt?.name)
       })
    
@@ -35,7 +34,7 @@ io.on('connection', (socket) => {
         socket.broadcast.to(room).emit("someone-writing",user,message);
      })
      
-
+    
       socket.on("join-room",(room,user,time)=>{
         
         const membersAsObj = Object.fromEntries(members);

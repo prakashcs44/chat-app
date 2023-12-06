@@ -3,16 +3,16 @@ import Loading from './Loading'
 
 function Writing({writer}) {
   return (
-    <div style={{marginBottom:"10px"}}>
+    <div className = "loader" >
     <div
-    style={{marginLeft:"150px",
+    style={{
     fontSize:"20px",
     margin:"auto",
     textAlign:"center"
   
   }}
     >
-      {writer} is writing...
+      <p>{writer} is writing...</p>
     </div>
     <Loading/>
     </div>
